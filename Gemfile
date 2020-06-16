@@ -5,7 +5,6 @@ ruby '2.6.6'
 
 gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 
-gem 'sqlite3', '~> 1.4'
 
 gem 'puma', '~> 4.1'
 
@@ -31,6 +30,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'sqlite3', '~> 1.4'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
   gem 'spring'
@@ -41,6 +41,10 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+end
+
+group :production, :test do
+  gem 'pg'
 end
 
 gem 'devise'
