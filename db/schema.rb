@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_171524) do
+ActiveRecord::Schema.define(version: 2020_06_16_223948) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
@@ -26,7 +26,27 @@ ActiveRecord::Schema.define(version: 2020_06_16_171524) do
     t.integer "max_loan_days", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "loans_count", default: 0, null: false
     t.index ["category_id"], name: "index_items_on_category_id"
+  end
+
+  create_table "loans", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "item_id", null: false
+    t.datetime "requested_at", null: false
+    t.datetime "fulfilled_at", null: false
+    t.datetime "returned_at", null: false
+    t.integer "status", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at"], name: "index_loans_on_created_at"
+    t.index ["fulfilled_at"], name: "index_loans_on_fulfilled_at"
+    t.index ["item_id"], name: "index_loans_on_item_id"
+    t.index ["requested_at"], name: "index_loans_on_requested_at"
+    t.index ["returned_at"], name: "index_loans_on_returned_at"
+    t.index ["status"], name: "index_loans_on_status"
+    t.index ["updated_at"], name: "index_loans_on_updated_at"
+    t.index ["user_id"], name: "index_loans_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,9 +65,12 @@ ActiveRecord::Schema.define(version: 2020_06_16_171524) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "loans_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "items", "categories"
+  add_foreign_key "loans", "items"
+  add_foreign_key "loans", "users"
 end

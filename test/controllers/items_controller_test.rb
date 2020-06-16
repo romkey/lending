@@ -38,11 +38,11 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to item_url(@item)
   end
 
-  test "should destroy item" do
-    assert_difference('Item.count', -1) do
-      delete item_url(@item)
-    end
+#  test "should destroy item" do
+#    assert_difference('Item.count', -1) do
+#      delete item_url(@item)
+#    end
 
-    assert_redirected_to items_url
-  end
+#    assert_redirected_to items_url
+#  end
 end

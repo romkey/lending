@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  item: one
+  requested_at: 2020-06-16 13:46:02
+  fulfilled_at: 2020-06-16 13:46:02
+  returned_at: 2020-06-16 13:46:02
+  status: 1
+
+two:
+  user: two
+  item: two
+  requested_at: 2020-06-16 13:46:02
+  fulfilled_at: 2020-06-16 13:46:02
+  returned_at: 2020-06-16 13:46:02
+  status: 1
