@@ -47,6 +47,8 @@ group :production, :test do
   gem 'pg'
 end
 
+gem "bootstrap_form"
+
 gem 'devise'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
