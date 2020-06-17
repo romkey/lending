@@ -30,7 +30,7 @@ before_install:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - bundle exec rails db:create db:migrate RAILS_ENV=test
+  - bundle exec rails webpacker:compile
 
 script:
-  - bundle exec rails webpacker:compile
   - bundle exec rails test RAILS_ENV=test
