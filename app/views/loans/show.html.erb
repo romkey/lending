@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @loan.user_id %>
+  <%= link_to @loan.user.name, "/user/#{@loan.user_id}" %>
 </p>
 
 <p>
   <strong>Item:</strong>
-  <%= @loan.item_id %>
+  <%= link_to @loan.item.name, @loan.item %>
 </p>
 
 <p>
@@ -23,11 +23,6 @@
 <p>
   <strong>Returned at:</strong>
   <%= @loan.returned_at %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @loan.status %>
 </p>
 
 <%= link_to 'Edit', edit_loan_path(@loan) %> |

@@ -16,7 +16,8 @@
   </div>
 
   <div class="field">
-    <%= form.text_field :category_id %>
+    <%= form.label :category_id %>
+    <%= form.select :category_id, options_for_select(Category.all.sort { |a,b| a.name <=> b.name }.map{ |s| [ s.name, s.id ] }) %>
   </div>
 
   <div class="field">

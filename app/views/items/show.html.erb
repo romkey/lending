@@ -7,18 +7,24 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @item.category_id %>
+  <%= @item.category.name %>
 </p>
 
+<% if can? :manage, @item %>
 <p>
   <strong>Serial number:</strong>
   <%= @item.serial_number %>
 </p>
+<% end %>
 
+<% if @item.available? %>
 <p>
-  <strong>Available:</strong>
-  <%= @item.available %>
+  <%= form_with(url: loans_path(item_id: @item.id), method: 'post') do %>
+    <input type='submit' class='btn btn-info' value='Borrow <%= @item.name %>'>
+  <% end %>
 </p>
+<% end %>
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<% if can? :manage, @item %>
+  <%= link_to 'Edit', edit_item_path(@item) %>
+<% end  %>

@@ -5,6 +5,16 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
+
+    if params[:category_id]
+      @items = Item.where(category_id: params[:category_id])
+    end
+
+    if params[:q]
+      @items = Item.where("name LIKE '%#{params[:q]}%'")
+    end
+
+    @items.order(available: :asc, name: :desc)
   end
 
   # GET /items/1

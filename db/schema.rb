@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_223948) do
+ActiveRecord::Schema.define(version: 2020_06_18_041129) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
@@ -22,11 +22,11 @@ ActiveRecord::Schema.define(version: 2020_06_16_223948) do
     t.string "name", null: false
     t.integer "category_id", null: false
     t.string "serial_number", default: "", null: false
-    t.boolean "available", default: true, null: false
     t.integer "max_loan_days", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "loans_count", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.index ["category_id"], name: "index_items_on_category_id"
   end
 
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 2020_06_16_223948) do
     t.datetime "requested_at", null: false
     t.datetime "fulfilled_at", null: false
     t.datetime "returned_at", null: false
-    t.integer "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_at"], name: "index_loans_on_created_at"
@@ -44,7 +43,6 @@ ActiveRecord::Schema.define(version: 2020_06_16_223948) do
     t.index ["item_id"], name: "index_loans_on_item_id"
     t.index ["requested_at"], name: "index_loans_on_requested_at"
     t.index ["returned_at"], name: "index_loans_on_returned_at"
-    t.index ["status"], name: "index_loans_on_status"
     t.index ["updated_at"], name: "index_loans_on_updated_at"
     t.index ["user_id"], name: "index_loans_on_user_id"
   end

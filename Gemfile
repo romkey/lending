@@ -50,6 +50,9 @@ end
 gem "bootstrap_form"
 
 gem 'devise'
+gem 'ginjo-omniauth-slack', require: 'omniauth-slack'
+gem 'dotenv-rails'
+gem 'cancancan'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
