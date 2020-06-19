@@ -33,10 +33,7 @@ class Ability
 
     if user.present?
       if user.admin? && !user.temporarily_demoted
-        can :manage, Category
-        can :manage, Item
-        can :manage, User
-        can :manage, Loan
+        can :manage, :all
       end
 
       can :read, Loan, user: user

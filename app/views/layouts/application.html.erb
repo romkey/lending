@@ -29,7 +29,7 @@
 	<li class="nav-item">
 	  <%= link_to 'Categories', categories_path, class: 'nav-link' %>
 	</li>
-<% if can? :manage, :users %>
+<% if can? :manage, User %>
 	<li class="nav-item dropdown">
 	  <a href='/admin' class='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
   	  <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
