@@ -18,8 +18,8 @@ Please <%= link_to 'sign in', '/users/sign_in' %> using Slack to borrow items an
   <div class='col-md-4'>
     <h2>Recently Returned</h2>
     <ul class="list-group">
-      <% @recently_returned.each do |item| %>
-      <li class="list-group-item"><%= link_to item.name, item %></li>
+      <% @recently_returned.each do |loan| %>
+      <li class="list-group-item"><%= link_to loan.item.name, loan.item %></li>
       <% end %>
     </ul>
   </div>
