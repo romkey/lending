@@ -15,9 +15,11 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
 
-      if User.count == 0
+      if User.count < 4
         user.admin = true
       end
+
+      user.temporarily_demoted = false
       user.save
 
       return user

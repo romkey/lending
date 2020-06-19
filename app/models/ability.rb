@@ -32,7 +32,7 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
     if user.present?
-      if user.admin? && session[:demote]
+      if user.admin? && !user.temporarily_demoted
         can :manage, Category
         can :manage, Item
         can :manage, User
