@@ -19,7 +19,7 @@
     <% @items.each do |item| %>
       <tr>
         <td><%= link_to item.name, item %></td>
-        <td><%= link_to item.category.name, item.category %></td>
+        <td><%= link_to item.category.name, items_path(category_id: item.category.id) %></td>
 <% if can? :manage, item %>
         <td><%= item.serial_number %></td>
 <% end %>
