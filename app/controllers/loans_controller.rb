@@ -8,7 +8,7 @@ class LoansController < ApplicationController
   # GET /loans.json
   def index
     unless current_user.present?
-      
+      raise ActionController::RoutingError.new('Not Found')
     end
 
     if current_user.admin?
@@ -21,10 +21,17 @@ class LoansController < ApplicationController
   # GET /loans/1
   # GET /loans/1.json
   def show
+    if current_user != @loan.user && !current_user.admin
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   # GET /loans/new
   def new
+    unless current_user.admin
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
     @loan = Loan.new
   end
 
@@ -60,6 +67,10 @@ class LoansController < ApplicationController
   # PATCH/PUT /loans/1
   # PATCH/PUT /loans/1.json
   def update
+    if current_user != @loan.user && !current_user.admin
+      raise ActionController::RoutingError.new('Not Found')
+    end
+
     respond_to do |format|
       if @loan.update(loan_params)
         format.html { redirect_to @loan, notice: 'Loan was successfully updated.' }
