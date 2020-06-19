@@ -3,7 +3,7 @@
 <% if current_user.present? %>
 Welcome back, <%= current_user.name %>!
 <% else %>
-Please <%= link_to 'sign in', '/users/sign_in' %> using Slack to borrow items and manage your account.
+Please <%= link_to 'sign in', new_user_session_path %> using Slack to borrow items and manage your account.
 </p>
 <% end %>
 <div class='row'>

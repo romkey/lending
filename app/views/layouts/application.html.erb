@@ -38,10 +38,17 @@
 	    <%= link_to 'Overdue loans', '/users', class: 'dropdown-item' %>
 	    <div class='dropdown-divider'></div>
 	    <%= link_to 'Users', '/users', class: 'dropdown-item' %>
+	    <div class='dropdown-divider'></div>
+	    <%= link_to 'Demote from admin for session', '/users', class: 'dropdown-item' %>
 	  </div>
 	</li>
 <% end %>
       </ul>
+<% if user_signed_in? %>
+       <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link my-2 my-lg-0' %>
+<% else %>
+       <%= link_to 'Sign in', new_user_session_path, class: 'nav-link'%>
+<% end %>
       <form class="form-inline my-2 my-lg-0" action='<%= items_path %>'>
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='q'>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
