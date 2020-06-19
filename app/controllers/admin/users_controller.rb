@@ -61,6 +61,13 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def demote
+    current_user.temporarily_demoted = true
+    current_user.save
+
+    redirect_to '/'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
