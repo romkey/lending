@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
       @items = Item.where("name ILIKE '%#{params[:q]}%'")
     end
 
-    @items.order(name: :desc)
+    @items = @items.order(name: :asc)
   end
 
   # GET /items/1
