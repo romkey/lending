@@ -2,7 +2,7 @@ class LoansController < ApplicationController
   before_action :set_loan, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  load_and_authorize_resource
+#  load_and_authorize_resource
 
   # GET /loans
   # GET /loans.json
@@ -36,14 +36,15 @@ class LoansController < ApplicationController
   # POST /loans.json
   def create
     @loan = Loan.new(params.permit(:item_id))
+
+    item = @loan.item
+    item.status = :on_loan
+    item.save!
+
     @loan.user = current_user
     @loan.requested_at = Time.now
-    @loan.returned_at = Time.now
-    @loan.fulfilled_at = Time.now
+    @loan.due_at = @loan.requested_at + item.max_loan_days.days
 
-    @item = @loan.item
-    @item.status = :on_loan
-    @item.save!
 
     respond_to do |format|
       if @loan.save

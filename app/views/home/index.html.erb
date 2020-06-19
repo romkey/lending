@@ -1,1 +1,26 @@
 <h1>Welcome to the PDX Hackerspace Lending Library</h1>
+<p>
+<% if current_user.present? %>
+Welcome back, <%= current_user.name %>!
+<% else %>
+Please <%= link_to 'sign in', '/users/sign_in' %> using Slack to borrow items and manage your account.
+</p>
+<% end %>
+<div class='row'>
+  <div class='col-md-4'>
+    <h2>Recently Added</h2>
+    <ul class="list-group">
+      <% @recently_added.each do |item| %>
+      <li class="list-group-item"><%= link_to item.name, item %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class='col-md-4'>
+    <h2>Recently Returned</h2>
+    <ul class="list-group">
+      <% @recently_returned.each do |item| %>
+      <li class="list-group-item"><%= link_to item.name, item %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

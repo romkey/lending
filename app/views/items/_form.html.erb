@@ -16,7 +16,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :category_id %>
     <%= form.select :category_id, options_for_select(Category.all.sort { |a,b| a.name <=> b.name }.map{ |s| [ s.name, s.id ] }) %>
   </div>
 
@@ -25,7 +24,11 @@
   </div>
 
   <div class="field">
-    <%= form.check_box :available %>
+    <%= form.text_field :max_loan_days, label: "Max loan days (defaults to category setting)" %>
+  </div>
+
+  <div class="field">
+    <%= form.file_field :photo %>
   </div>
 
   <div class="actions">

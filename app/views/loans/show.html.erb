@@ -1,18 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= link_to @loan.user.name, "/user/#{@loan.user_id}" %>
-</p>
-
-<p>
   <strong>Item:</strong>
-  <%= link_to @loan.item.name, @loan.item %>
+  <%= link_to @loan.item.name, @loan.item %> -  <%= link_to @loan.item.category.name, @loan.item.category %>
+borrowed by 
+  <%= link_to @loan.user.name, "/user/#{@loan.user_id}" %>
 </p>
 
 <p>
   <strong>Requested at:</strong>
   <%= @loan.requested_at %>
+</p>
+
+<p>
+  <strong>Due at:</strong>
+  <%= @loan.due_at %>
 </p>
 
 <p>
@@ -25,5 +27,8 @@
   <%= @loan.returned_at %>
 </p>
 
-<%= link_to 'Edit', edit_loan_path(@loan) %> |
-<%= link_to 'Back', loans_path %>
+<%= link_to 'Confirm Fulfilled', '/loan', class: 'btn btn-primary' %>
+<%= link_to 'Confirm Returned', '/loan', class: 'btn btn-secondary' %>
+<%= link_to 'Cancel Loan', '/loan', class: 'btn btn-danger' %>
+<br><br>
+<%= link_to 'Edit', edit_loan_path(@loan), class: 'btn btn-info' %>

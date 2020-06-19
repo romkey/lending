@@ -1,30 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @item.category.name %>
-</p>
-
-<% if can? :manage, @item %>
-<p>
-  <strong>Serial number:</strong>
-  <%= @item.serial_number %>
-</p>
+<div class="card" style="width: 18rem;">
+<% if @item.photo.attached? %>
+  <%= image_tag @item.photo, { class: 'card-img-top' } %>
+  <image src="<% url_for(@item.photo) %>">
+<% else %>
+    <p>no photo</p>
 <% end %>
-
+<div class="card-body">
+   <h5 class="card-title"><%= @item.name %></h5>
+    <h6 class="card-subtitle mb-2 text-muted"><%= link_to @item.category.name, @item.category %></h6>
+<% if can? :manage, @item %>
+    <h6 class='card-subtitle b-2-text-muted'>Serial number: <%= @item.serial_number %></h6>
+    <h6 class='card-subtitle b-2-text-muted'>Status: <%= @item.status %></h6>
+    <p class="card-text">
+<% end %>
 <% if @item.available? %>
-<p>
-  <%= form_with(url: loans_path(item_id: @item.id), method: 'post') do %>
+   <%= form_with(url: loans_path(item_id: @item.id), local: true, method: 'post') do %>
     <input type='submit' class='btn btn-info' value='Borrow <%= @item.name %>'>
-  <% end %>
-</p>
+   <% end %>
+  </p>
 <% end %>
-
 <% if can? :manage, @item %>
-  <%= link_to 'Edit', edit_item_path(@item) %>
+  <%= link_to 'Edit', edit_item_path(@item), class: 'btn btn-info'  %>
 <% end  %>
+  </div>
+</div>
+
+
+
+
+

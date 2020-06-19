@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
       @items = Item.where("name LIKE '%#{params[:q]}%'")
     end
 
-    @items.order(available: :asc, name: :desc)
+    @items.order(name: :desc)
   end
 
   # GET /items/1
@@ -35,6 +35,9 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
+    if @item.max_loan_days.nil? || @item.max_loan_days == 0
+      @item.max_loan_days = @item.category.loan_duration
+    end
 
     respond_to do |format|
       if @item.save
@@ -50,6 +53,10 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
+    if params[:photo]
+      @item.photo.attach(params[:photo])
+    end
+
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
@@ -79,6 +86,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :category_id, :serial_number, :available)
+      params.require(:item).permit(:name, :category_id, :serial_number, :status, :photo)
     end
 end

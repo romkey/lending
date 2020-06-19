@@ -54,5 +54,8 @@ gem 'ginjo-omniauth-slack', require: 'omniauth-slack'
 gem 'dotenv-rails'
 gem 'cancancan'
 
+gem 'activestorage-database-service', github: 'TitovDigital/activestorage-database-service'
+gem 'image_processing'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
