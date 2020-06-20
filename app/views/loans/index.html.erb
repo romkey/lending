@@ -39,6 +39,6 @@
 
 <br>
 
-<% if current_user.admin? %>
+<% if can? :manage, Loan  %>
 <%= link_to 'New Loan', new_loan_path, class: 'btn btn-info'  %>
 <% end %>
