@@ -1,0 +1,5 @@
+class AddDescriptionToItem < ActiveRecord::Migration[6.0]
+  def change
+    add_column :items, :description, :string, null: false, default: '', index: true
+  end
+end

@@ -13,8 +13,9 @@
 <% if can? :manage, @item %>
     <h6 class='card-subtitle b-2-text-muted'>Serial number: <%= @item.serial_number %></h6>
     <h6 class='card-subtitle b-2-text-muted'>Status: <%= @item.status %></h6>
-    <p class="card-text">
 <% end %>
+    <p class="card-text">
+ <%= @item.description %>
 <% if @item.available? %>
    <%= form_with(url: loans_path(item_id: @item.id), local: true, method: 'post') do %>
     <input type='submit' class='btn btn-info' value='Borrow <%= @item.name %>'>

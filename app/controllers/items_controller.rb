@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     end
 
     if params[:q]
-      @items = Item.where("name ILIKE '%#{params[:q]}%'")
+      @items = Item.where("name ILIKE '%#{params[:q]}%' OR description ILIKE '%#{params[:q]}%'")
     end
 
     @items = @items.order(name: :asc)
