@@ -7,6 +7,16 @@ Please <%= link_to 'sign in', new_user_session_path %> using Slack to borrow ite
 </p>
 <% end %>
 <div class='row'>
+<% if can? :manage, Loan %>
+  <div class='col-md-4'>
+    <h2>Overdue</h2>
+    <ul class="list-group">
+      <% @overdue.each do |loan| %>
+      <li class="list-group-item"><%= link_to loan.item.name, loan.item %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>  
   <div class='col-md-4'>
     <h2>Recently Added</h2>
     <ul class="list-group">

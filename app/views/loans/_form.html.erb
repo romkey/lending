@@ -28,14 +28,14 @@
   </div>
 
   <div class="field">
-    <%= form.datetime_select :returned_at %>
+    <%= form.datetime_select :due_at %>
   </div>
 
   <div class="field">
-    <%= form.select :status, options_for_select(Item.statuses) %>
+    <%= form.datetime_select :returned_at %>
   </div>
 
-  <div class="actions">
+   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
