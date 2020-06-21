@@ -32,7 +32,7 @@
   </div>
 
    <div class="field">
-    <%= form.select :status, options_for_select(Item.statuses) %>
+    <%= form.select :status, options_for_select(Item.statuses, Item.statuses[@item.status]) %>
    </div>
    
   <div class="field">
@@ -40,6 +40,7 @@
   </div>
 
   <div class="actions">
+    <%= link_to 'Cancel', items_path, class: 'btn btn-danger' %>
     <%= form.submit %>
   </div>
 <% end %>

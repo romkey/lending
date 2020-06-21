@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= form.select :user_id, options_for_select(User.order(name: :asc).map{ |s| [ s.name, s.id ] }) %>
+    <%= form.select :user_id, options_for_select(User.order(name: :asc).map{ |s| [ s.name, s.id ] }, @loan.user_id) %>
   </div>
 
   <div class="field">
-    <%= form.select :item_id, options_for_select(Item.order(name: :asc).map{ |s| [ s.name, s.id ] }) %>
+    <%= form.select :item_id, options_for_select(Item.order(name: :asc).map{ |s| [ s.name, s.id ] }, @loan.item_id) %>
   </div>
 
   <div class="field">
@@ -36,6 +36,7 @@
   </div>
 
    <div class="actions">
+    <%= link_to 'Cancel', loans_path, class: 'btn btn-danger' %>
     <%= form.submit %>
   </div>
 <% end %>
