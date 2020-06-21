@@ -7,6 +7,7 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
+      <th>Slack Name</th>
       <th>Slack UID</th>
       <th>Admin?</th>
       <th>Demoted?</th>
@@ -21,6 +22,7 @@
       <tr>
         <td><%= link_to user.name, user %></td>
         <td><%= user.email %></td>
+        <td><%= user.slack_name %></td>
         <td><%= user.slack_uid %></td>
         <td><%= user.admin %></td>
         <td><%= user.temporarily_demoted %></td>

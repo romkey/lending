@@ -71,19 +71,14 @@ class UsersController < ApplicationController
   end
 
   def import_from_slack
-    reply = open('https://slack.com/api/users.list?token=' + ENV['SLACK_APP_TOKEN']).read
+    reply = open('https://slack.com/api/users.list?token=xoxp-301782203810-309651859845-1196452364754-24fc92be6e1b4f1b0b100d2002d358c4&pretty=1').read
     json = JSON.parse reply
     json['members'].each do |member|
-      if member['profile']['email'].nil?
-        puts "no email for " + member["name"]
-      end
-
-      next if member['name'] == 'slackbot' || member['is_bot'] || member['profile']['email'].nil?
-      User.where(email: member['profile']['email']).first_or_create! do |user|
-        user.slack_uid = "#{member['id']}-#{member['team_id']}"
-        user.slack_name = member['name']
-        user.name = member['profile']['real_name']
-        user.encrypted_password = '***'
+      next if member['name'] == 'slackbot' || member['is_bot']
+      User.where(email: member.email).first_or_create do |user|
+        user.slack_uid = "#{member['team_id']}-#{member['id']}"
+        user.name = member['name']
+        user.email = member['email']
       end
     end
 
