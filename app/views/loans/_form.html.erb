@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= form.text_field :user_id %>
+    <%= form.select :user_id, options_for_select(User.order(name: :asc).map{ |s| [ s.name, s.id ] }) %>
   </div>
 
   <div class="field">
-    <%= form.text_field :item_id %>
+    <%= form.select :item_id, options_for_select(Item.order(name: :asc).map{ |s| [ s.name, s.id ] }) %>
   </div>
 
   <div class="field">
@@ -32,7 +32,7 @@
   </div>
 
   <div class="field">
-    <%= form.number_field :status %>
+    <%= form.select :status, options_for_select(Item.statuses) %>
   </div>
 
   <div class="actions">
