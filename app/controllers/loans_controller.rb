@@ -19,14 +19,17 @@ class LoansController < ApplicationController
 
     if params.has_key?(:overdue)
       @loans = @loans.where('due_at IS NOT NULL AND due_at < ?', Time.now).order(due_at: :desc)
+      @subheading = 'Overdue loans'
     end
 
     if params.has_key?(:new_loans)
       @loans = @loans.where('fulfilled_at IS NULL').order(created_at: :desc)
+      @subheading = 'New loan requests'
     end
 
     if params.has_key?(:returned)
       @loans = @loans.where('returned_at IS NOT NULL').order(created_at: :desc)
+      @subheading = 'Newly returned loans'
     end
   end
 
