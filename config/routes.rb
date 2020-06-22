@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   end
 
   resources :loans
+  get '/loans/cancel/:id', to: 'loans#cancel', as: 'cancel_loan'
+
   resources :items
   resources :categories
 

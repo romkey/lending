@@ -1,5 +1,5 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_loan, only: [:show, :edit, :update, :destroy, :fulfill, :return, :cancel]
   before_action :authenticate_user!
 
 #  load_and_authorize_resource
@@ -15,6 +15,18 @@ class LoansController < ApplicationController
       @loans = Loan.all
     else
       @loans = current_user.loans
+    end
+
+    if params.has_key?(:overdue)
+      @loans = @loans.where('due_at IS NOT NULL AND due_at < ?', Time.now).order(due_at: :desc)
+    end
+
+    if params.has_key?(:new_loans)
+      @loans = @loans.where('fulfilled_at IS NULL').order(created_at: :desc)
+    end
+
+    if params.has_key?(:returned)
+      @loans = @loans.where('returned_at IS NOT NULL').order(created_at: :desc)
     end
   end
 
@@ -50,12 +62,57 @@ class LoansController < ApplicationController
 
     @loan.user = current_user
     @loan.requested_at = Time.now
-    @loan.due_at = @loan.requested_at + item.max_loan_days.days
-
 
     respond_to do |format|
       if @loan.save
         format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
+        format.json { render :show, status: :created, location: @loan }
+      else
+        format.html { render :new }
+        format.json { render json: @loan.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def fulfill
+    @loan.fulfilled_at = Time.now
+    @loan.due_at = @loan.fulfilled_at + @loan.item.max_loan_days.days
+
+    respond_to do |format|
+      if @loan.save
+        format.html { redirect_to @loan, notice: 'Loan was successfully fulfilled.' }
+        format.json { render :show, status: :created, location: @loan }
+      else
+        format.html { render :new }
+        format.json { render json: @loan.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def return
+    @loan.returned_at = Time.now
+
+    respond_to do |format|
+      if @loan.save
+        format.html { redirect_to @loan, notice: 'Loan was successfully returned.' }
+        format.json { render :show, status: :created, location: @loan }
+      else
+        format.html { render :new }
+        format.json { render json: @loan.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def cancel
+    item = @loan.item
+    item.status = :available
+    item.save
+
+    @loan.returned_at = Time.now
+
+    respond_to do |format|
+      if @loan.save
+        format.html { redirect_to @loan, notice: 'Loan was successfully cancelled.' }
         format.json { render :show, status: :created, location: @loan }
       else
         format.html { render :new }

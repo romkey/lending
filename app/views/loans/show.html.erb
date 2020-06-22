@@ -28,11 +28,11 @@ borrowed by
 
 <p>
   <strong>Returned at:</strong>
-  <%= @loan.returned_at.try { |t| strftime("%A, %H:%M  %d/%m/%Y") } %>
+  <%= @loan.returned_at.try { |t| t.strftime("%A, %H:%M  %d/%m/%Y") } %>
 </p>
 
 <%= link_to 'Confirm Fulfilled', '/loan', class: 'btn btn-primary' %>
 <%= link_to 'Confirm Returned', '/loan', class: 'btn btn-secondary' %>
-<%= link_to 'Cancel Loan', '/loan', class: 'btn btn-danger' %>
+<%= link_to 'Cancel Loan', cancel_loan_url(@loan), class: 'btn btn-danger' %>
 <br><br>
 <%= link_to 'Edit', edit_loan_path(@loan), class: 'btn btn-info' %>

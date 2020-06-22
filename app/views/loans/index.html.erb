@@ -29,7 +29,7 @@
         <td><%= loan.due_at %></td>
         <td><%= loan.returned_at %></td>
 <% if can? :manage, Loan %>
-        <td><%= link_to 'Edit', edit_loan_path(loan) %></td>
+        <td><%= link_to 'Show', loan_path(loan) %></td>
         <td><%= link_to 'Delete', loan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 <% end %>
       </tr>

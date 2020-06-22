@@ -33,9 +33,9 @@
 	<li class="nav-item dropdown">
 	  <a href='/admin' class='nav-link dropdown-toggle' id='navbarDropdown' role='button' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
   	  <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
-	    <%= link_to 'New requests', '/users', class: 'dropdown-item' %>
-	    <%= link_to 'New returns', '/users', class: 'dropdown-item' %>
-	    <%= link_to 'Overdue loans', '/users', class: 'dropdown-item' %>
+	    <%= link_to 'New requests', loans_path(new_loans: 1), class: 'dropdown-item' %>
+	    <%= link_to 'New returns', loans_path(returned: 1), class: 'dropdown-item' %>
+	    <%= link_to 'Overdue loans',loans_path(overdue: 1), class: 'dropdown-item' %>
 	    <div class='dropdown-divider'></div>
 	    <%= link_to 'Users', users_path, class: 'dropdown-item' %>
 	    <div class='dropdown-divider'></div>
