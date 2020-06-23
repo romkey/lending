@@ -4,6 +4,11 @@
 <h1 class='btn btn-danger'>OVERDUE!</h1>
 <% end %>
 
+<% if @loan.complete? %>
+<h1 class='btn btn-info'>Complete!</h1>
+<% end %>
+
+
 <h2><%= link_to @loan.item.name, @loan.item %></h2>
 <p>
  <%= link_to @loan.item.category.name, @loan.item.category %>
@@ -31,8 +36,17 @@ borrowed by
   <%= @loan.returned_at.try { |t| t.strftime("%A, %H:%M  %d/%m/%Y") } %>
 </p>
 
-<%= link_to 'Confirm Fulfilled', '/loan', class: 'btn btn-primary' %>
-<%= link_to 'Confirm Returned', '/loan', class: 'btn btn-secondary' %>
-<%= link_to 'Cancel Loan', cancel_loan_url(@loan), class: 'btn btn-danger' %>
+<% if @loan.fulfillable? %>
+  <%= link_to 'Confirm Fulfilled', '/loan', class: 'btn btn-primary' %>
+<% end %>
+
+<% if !@loan.complete? %>
+  <%= link_to 'Cancel Loan', cancel_loan_url(@loan), class: 'btn btn-danger' %>
+<% end %>
+
+<% unless @loan.returned_at %>
+  <%= link_to 'Confirm Returned', '/loan', class: 'btn btn-secondary' %>
+<% end %>
+
 <br><br>
 <%= link_to 'Edit', edit_loan_path(@loan), class: 'btn btn-info' %>
