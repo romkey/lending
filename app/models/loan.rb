@@ -7,7 +7,7 @@ class Loan < ApplicationRecord
   end
 
   def overdue?
-    due_at < Time.now && !returned_at
+    due_at && due_at < Time.now && !returned_at
   end
 
   def complete?
