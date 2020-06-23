@@ -37,7 +37,7 @@ borrowed by
 </p>
 
 <% if @loan.fulfillable? %>
-  <%= link_to 'Confirm Fulfilled', '/loan', class: 'btn btn-primary' %>
+  <%= link_to 'Confirm Fulfilled', fulfill_loan_url(@loan), class: 'btn btn-primary' %>
 <% end %>
 
 <% if !@loan.complete? %>
@@ -45,7 +45,7 @@ borrowed by
 <% end %>
 
 <% unless @loan.returned_at %>
-  <%= link_to 'Confirm Returned', '/loan', class: 'btn btn-secondary' %>
+  <%= link_to 'Confirm Returned', return_loan_url(@loan), class: 'btn btn-secondary' %>
 <% end %>
 
 <br><br>
